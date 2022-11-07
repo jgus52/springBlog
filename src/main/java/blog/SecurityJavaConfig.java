@@ -53,7 +53,7 @@ public class SecurityJavaConfig {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
         admin.setId(id);
-        admin.setPwd(encoder.encode("jgus5252"));
+        admin.setPwd(encoder.encode(pwd));
 
         return admin;
     }
