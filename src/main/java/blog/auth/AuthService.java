@@ -19,8 +19,7 @@ public class AuthService {
     }
 
     public String authenticate(String id, String pwd){
-        System.out.println(pwd);
-        if(passwordEncoder.matches(pwd, admin.getPwd())){
+        if(id.equals(admin.getId()) && passwordEncoder.matches(pwd, admin.getPwd())){
             return JwtTokenProvider.generateToken(admin);
         }
         else throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Wrong Id or Pwd");

@@ -21,7 +21,7 @@ public class SecurityJavaConfig {
 
     @Value("${id}")
     String id;
-    @Value("${pwd}")
+    @Value("${password}")
     String pwd;
 
     @Bean
@@ -49,11 +49,11 @@ public class SecurityJavaConfig {
 
     @Bean
     public Admin admin(){
-        Admin admin = new Admin();
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        admin.setId(id);
-        admin.setPwd(encoder.encode(pwd));
+        Admin admin = new Admin(id, encoder.encode(pwd));
+//        admin.setId(id);
+//        admin.setPwd(encoder.encode(pwd));
 
         return admin;
     }

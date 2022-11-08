@@ -34,14 +34,11 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)throws IOException, ServletException {
         String token = resolveToken((HttpServletRequest) request);
         if(token != null && JwtTokenProvider.validateToken(token)){
-//            System.out.println(token);
-            //토큰이 유효하다면
             List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
             roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(admin.getId(), "", roles);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
         }
         filterChain.doFilter(request, response);
     }

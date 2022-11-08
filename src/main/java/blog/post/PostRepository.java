@@ -50,7 +50,7 @@ public class PostRepository {
     }
 
     public List<Post> getPosts() {
-        String sql = "select * from post order by createdAt";
+        String sql = "select * from post order by createdAt desc";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
