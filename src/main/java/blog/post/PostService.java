@@ -1,13 +1,15 @@
 package blog.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
-    private final PostRepository postRepository;
+    private PostRepository postRepository;
     private final S3Service s3Service;
 
     @Autowired
@@ -29,16 +31,18 @@ public class PostService {
             contents[i] = s;
         }
 
-        return postRepository.createPost(post);
+        return postRepository.save(post);
     }
 
     public List<Post> getPosts(){
-        return postRepository.getPosts();
+        return postRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    public Post getPost() {return postRepository.getPost();}
-
-    public Post getPost(int id) {return postRepository.getPost(id);}
-
-    public void editPost(Post post){ postRepository.editPost(post); }
+//    public Post getPost() {return postRepository.getPost();}
+//
+//    public Post getPost(int id) {return postRepository.getPost(id);}
+//
+    public void editPost(Post post){
+        postRepository.save(post);
+    }
 }

@@ -13,13 +13,12 @@ public class AuthService {
     Admin admin;
 
     @Autowired
-    AuthService(PasswordEncoder passwordEncoder, Admin admin){
-        this.passwordEncoder = passwordEncoder;
+    AuthService(Admin admin){
         this.admin = admin;
     }
 
     public String authenticate(String id, String pwd){
-        if(id.equals(admin.getId()) && passwordEncoder.matches(pwd, admin.getPwd())){
+        if(admin.match(id, pwd)){
             return JwtTokenProvider.generateToken(admin);
         }
         else throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Wrong Id or Pwd");

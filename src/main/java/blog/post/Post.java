@@ -1,44 +1,37 @@
 package blog.post;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
+
+@Document(collection = "Post")
 public class Post {
-    @JsonProperty
-    private Integer id;
-    @JsonProperty
-    private String content[];
-    @JsonProperty
-    private Timestamp createdAt;
+    @Id
+    private String id;
 
-    public Integer getId(){
+    private String content[];
+    private String createdAt;
+
+    public Post() {
+        this.createdAt = LocalDateTime.now().toString();
+    }
+    public Post(String[] content){
+        this.content = content;
+        this.createdAt = LocalDateTime.now().toString();
+    }
+    public Post(String[] content, String createdAt){
+        this.content = content;
+        this.createdAt = createdAt;
+    }
+    public String[] getContent() {
+        return content;
+    }
+    public String getId(){
         return id;
     }
-    public Timestamp getCreatedAt(){
+    public String getCreatedAt(){
         return createdAt;
-    }
-    public String[] getContent(){
-        return this.content;
-    }
-
-    public void setId(int id){
-        this.id = id;
-    }
-
-    public void setCreatedAt(Timestamp createdAt){
-        this.createdAt = createdAt;
-    }
-
-    public void setContent(String[] content){
-        this.content = content;
-    }
-
-    Post(){}
-
-    Post(Integer id, String content[], java.sql.Timestamp createdAt){
-        this.id = id;
-        this.content = content;
-        this.createdAt = createdAt;
     }
 }

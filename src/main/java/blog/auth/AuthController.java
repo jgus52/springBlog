@@ -14,7 +14,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth")
-    public String login(@RequestBody Admin body) {
+    public String login(@RequestBody LoginForm body) {
         try{
             return authService.authenticate(body.getId(), body.getPwd());
         }catch(ResponseStatusException e){

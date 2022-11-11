@@ -1,27 +1,26 @@
 package blog.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class postController {
+public class PostController {
     final private PostService postService;
 
     @Autowired
-    postController(PostService postService){
+    PostController(PostService postService){
         this.postService = postService;
     }
 
-    @GetMapping("/post")
-    public Post getPost(@RequestParam (required = false) Integer id)
-    {
-        if(id != null) return postService.getPost(id);
-
-        return postService.getPost();
-    }
+//    @GetMapping("/post")
+//    public Post getPost(@RequestParam (required = false) Integer id)
+//    {
+////        if(id != null) return postService.getPost(id);
+////
+////        return postService.getPost();
+//    }
 
     @GetMapping("/posts")
     public List<Post> getAllPost()
