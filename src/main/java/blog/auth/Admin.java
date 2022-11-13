@@ -10,15 +10,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 @Component
-public class Admin implements InitializingBean {
+public class Admin {
     @Value("${id}")
     private String id;
     @Value("${password}")
     private String pwd;
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @Override
+    @PostConstruct
     public void afterPropertiesSet() {
         pwd = encoder.encode(pwd);
     }

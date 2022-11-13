@@ -8,5 +8,5 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
-    public List<Post> findAllByOrderByCreatedAtDesc();
+    List<Post> findAllByOrderByCreatedAtDesc();
 }

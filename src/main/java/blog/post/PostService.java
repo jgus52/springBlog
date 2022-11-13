@@ -19,16 +19,16 @@ public class PostService {
     }
 
     public Post createPost(Post post){
-        String[] contents = post.getContent();
+        List<String> contents = post.getContent();
 
-        for(int i=0; i<contents.length; i++){
-            String s  = contents[i];
+        for(int i=0; i<contents.size(); i++){
+            String s  = contents.get(i);
             if(s.startsWith("data:")){
                 byte[] image = org.apache.commons.codec.binary.Base64.decodeBase64((s.substring(s.indexOf(",")+1)).getBytes());
 
                 s = s3Service.upload(image);
             }
-            contents[i] = s;
+            contents.set(i,s);
         }
 
         return postRepository.save(post);
